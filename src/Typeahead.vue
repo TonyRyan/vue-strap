@@ -4,7 +4,7 @@
       v-model="val"
       :placeholder="placeholder"
       :type.once="type"
-      @blur="showDropdown = false"
+      @blur="blur"
       @keydown.down.prevent="down"
       @keydown.enter="hit"
       @keydown.esc="reset"
@@ -36,6 +36,10 @@ export default {
     onHit: {
       type: Function,
       default (item) { return item }
+    },
+    onBlur: {
+      type: Function,
+      default () { return }
     },
     placeholder: {type: String},
     template: {type: String},
@@ -97,6 +101,11 @@ export default {
     hit (e) {
       e.preventDefault()
       this.setValue(this.onHit(this.items[this.current], this))
+    },
+    blur (e) {
+      e.preventDefault()
+      this.showDropdown = false
+      this.onBlur();
     },
     up () {
       if (this.current > 0) { this.current-- }
