@@ -131,7 +131,7 @@ export default {
         this.setItems(this.data)
       }
     }, 'delay', DELAY)
-    this.__update()
+    //this.__update()
   }
 }
 </script>
